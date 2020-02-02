@@ -58,5 +58,8 @@ func main() {
 		}(user)
 
 	}
+	for i := 0; i < *maxThreads; i++ {
+		sem <- struct{}{}
+	}
 	bar.Finish()
 }
