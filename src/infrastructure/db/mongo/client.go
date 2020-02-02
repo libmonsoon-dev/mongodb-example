@@ -23,7 +23,7 @@ func NewClient(config *Config) (*mongo.Client, error) {
 		return nil, err
 	}
 
-	if err := client.Ping(nil, readpref.Primary()); err != nil {
+	if err := client.Ping(ctx, readpref.Primary()); err != nil {
 		return nil, err
 	}
 
