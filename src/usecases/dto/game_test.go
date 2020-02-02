@@ -10,11 +10,11 @@ import (
 func TestGameDto_UnmarshalJSON(t *testing.T) {
 	tests := []struct {
 		input  []byte
-		expect GameDto
+		expect Game
 	}{
 		{
 			[]byte(`{}`),
-			GameDto{},
+			Game{},
 		},
 		{
 			[]byte(`{
@@ -23,7 +23,7 @@ func TestGameDto_UnmarshalJSON(t *testing.T) {
 				"game_type":"17",
 				"created":"1/17/2019 9:54 AM"
 			}`),
-			GameDto{
+			Game{
 				1933,
 				0,
 				17,
@@ -37,7 +37,7 @@ func TestGameDto_UnmarshalJSON(t *testing.T) {
 				"game_type":"5",
 				"created":"5/24/2019 5:36 PM"
 			}`),
-			GameDto{
+			Game{
 				1076,
 				1,
 				5,
@@ -46,7 +46,7 @@ func TestGameDto_UnmarshalJSON(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		game := GameDto{}
+		game := Game{}
 		err := json.Unmarshal(test.input, &game)
 
 		if err != nil {

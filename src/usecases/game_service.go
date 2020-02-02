@@ -15,7 +15,7 @@ type GameService struct {
 	validator      Validator
 }
 
-func (s *GameService) Store(dto dto.GameDto) (string, error) {
+func (s *GameService) Store(dto dto.Game) (string, error) {
 	err := s.validator.Struct(dto)
 	if err != nil {
 		return "", err

@@ -7,7 +7,7 @@ import (
 	"mongodb-example/src/usecases/dto"
 )
 
-func DtoToGame(dto dto.GameDto) domain.Game {
+func DtoToGame(dto dto.Game) domain.Game {
 	return domain.Game{
 		int(dto.PointsGained),
 		domain.WinStatus(dto.WinStatus),
