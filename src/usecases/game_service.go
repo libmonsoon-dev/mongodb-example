@@ -1,9 +1,14 @@
 package usecases
 
 import (
+	"context"
+	"time"
+
 	"mongodb-example/src/usecases/adapter"
 	"mongodb-example/src/usecases/dto"
 )
+
+const gameServiceStoreTimeout = 1 * time.Second
 
 type GameService struct {
 	gameRepository GameRepository
@@ -15,5 +20,11 @@ func (s *GameService) Store(dto dto.GameDto) error {
 	if err != nil {
 		return err
 	}
-	return s.gameRepository.Store(adapter.DtoToGame(dto))
+	ctx, cancel := context.WithTimeout(context.Background(), gameServiceStoreTimeout)
+	defer cancel()
+
+	if err := s.gameRepository.Store(ctx, adapter.DtoToGame(dto)); err != nil {
+		return err
+	}
+	return ctx.Err()
 }

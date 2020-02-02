@@ -1,9 +1,14 @@
 package usecases
 
 import (
+	"context"
+	"time"
+
 	"mongodb-example/src/usecases/adapter"
 	"mongodb-example/src/usecases/dto"
 )
+
+const userServiceStoreTimeout = 1 * time.Second
 
 type UserService struct {
 	userRepository UserRepository
@@ -15,5 +20,11 @@ func (s *UserService) Store(dto dto.UserDto) error {
 	if err != nil {
 		return err
 	}
-	return s.userRepository.Store(adapter.DtoToUser(dto))
+	ctx, cancel := context.WithTimeout(context.Background(), userServiceStoreTimeout)
+	defer cancel()
+
+	if err := s.userRepository.Store(ctx, adapter.DtoToUser(dto)); err != nil {
+		return err
+	}
+	return ctx.Err()
 }

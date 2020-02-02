@@ -1,7 +1,11 @@
 package usecases
 
-import "mongodb-example/src/domain"
+import (
+	"context"
+
+	"mongodb-example/src/domain"
+)
 
 type UserRepository interface {
-	Store(user domain.User) error
+	Store(ctx context.Context, user domain.User) error
 }
