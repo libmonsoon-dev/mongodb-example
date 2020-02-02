@@ -7,6 +7,7 @@ import (
 
 	"mongodb-example/src/domain"
 	"mongodb-example/src/interfaces/mongo/utils"
+	"mongodb-example/src/usecases"
 )
 
 const UsersCollectionName = "users"
@@ -15,7 +16,7 @@ type MongoUserRepository struct {
 	db *mongo.Database
 }
 
-func NewMongoUserRepository(db *mongo.Database) *MongoUserRepository {
+func NewMongoUserRepository(db *mongo.Database) usecases.UserRepository {
 	return &MongoUserRepository{db}
 }
 
