@@ -8,6 +8,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/cheggaaa/pb/v3"
+
 	"mongodb-example/src/usecases/dto"
 )
 
@@ -42,6 +44,8 @@ func main() {
 		panic(err)
 	}
 
+	bar := pb.StartNew(len(data.Objects))
+
 	for _, user := range data.Objects {
 		sem <- struct{}{}
 		go func(user dto.User) {
@@ -50,8 +54,9 @@ func main() {
 				logger.Printf("Error while saving %#v: %v\n", user, err)
 			}
 			<-sem
+			bar.Increment()
 		}(user)
 
 	}
-
+	bar.Finish()
 }
