@@ -8,6 +8,6 @@ type Validator interface {
 	Struct(v interface{}) error
 }
 
-func New() *validator.Validate {
+func NewValidator() Validator {
 	return validator.New()
 }
