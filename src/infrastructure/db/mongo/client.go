@@ -14,17 +14,17 @@ func NewClient(config *Config) (*mongo.Client, error) {
 	uri := fmt.Sprintf("mongodb://%v:%v", config.Host, config.Port)
 	opts := options.Client().ApplyURI(uri)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	client, err := mongo.Connect(ctx, opts)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("mongo connect error: %w", err)
 	}
 
 	if err := client.Ping(ctx, readpref.Primary()); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("mongo ping error: %w", err)
 	}
 
 	return client, nil
