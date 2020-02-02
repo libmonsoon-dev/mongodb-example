@@ -12,7 +12,7 @@ import (
 )
 
 type Data struct {
-	Objects []dto.UserDto `json:"objects"`
+	Objects []dto.User `json:"objects"`
 }
 
 func main() {
@@ -44,7 +44,7 @@ func main() {
 
 	for _, user := range data.Objects {
 		sem <- struct{}{}
-		go func(user dto.UserDto) {
+		go func(user dto.User) {
 			_, err := service.Store(user)
 			if err != nil {
 				logger.Printf("Error while saving %#v: %v\n", user, err)

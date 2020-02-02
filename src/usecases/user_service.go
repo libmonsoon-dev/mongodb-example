@@ -19,7 +19,7 @@ func NewUserService(userRepository UserRepository, validator Validator) *UserSer
 	return &UserService{userRepository, validator}
 }
 
-func (s *UserService) Store(dto dto.UserDto) (string, error) {
+func (s *UserService) Store(dto dto.User) (string, error) {
 	err := s.validator.Struct(dto)
 	if err != nil {
 		return "", err

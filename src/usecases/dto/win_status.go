@@ -1,18 +1,18 @@
 package dto
 
-type WinStatusDto stringInt
+type WinStatus stringInt
 
-func (i WinStatusDto) MarshalJSON() ([]byte, error) {
+func (i WinStatus) MarshalJSON() ([]byte, error) {
 	tmp := stringInt(i)
 	return tmp.MarshalJSON()
 }
 
-func (i *WinStatusDto) UnmarshalJSON(raw []byte) error {
+func (i *WinStatus) UnmarshalJSON(raw []byte) error {
 	tmp := stringInt(*i)
 	err := tmp.UnmarshalJSON(raw)
 	if err != nil {
 		return err
 	}
-	*i = WinStatusDto(tmp)
+	*i = WinStatus(tmp)
 	return nil
 }

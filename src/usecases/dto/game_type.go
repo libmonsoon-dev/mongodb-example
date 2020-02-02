@@ -1,18 +1,18 @@
 package dto
 
-type GameTypeDto stringInt
+type GameType stringInt
 
-func (i GameTypeDto) MarshalJSON() ([]byte, error) {
+func (i GameType) MarshalJSON() ([]byte, error) {
 	tmp := stringInt(i)
 	return tmp.MarshalJSON()
 }
 
-func (i *GameTypeDto) UnmarshalJSON(raw []byte) error {
+func (i *GameType) UnmarshalJSON(raw []byte) error {
 	tmp := stringInt(*i)
 	err := tmp.UnmarshalJSON(raw)
 	if err != nil {
 		return err
 	}
-	*i = GameTypeDto(tmp)
+	*i = GameType(tmp)
 	return nil
 }

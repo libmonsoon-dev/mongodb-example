@@ -10,8 +10,8 @@ import (
 func DtoToGame(dto dto.GameDto) domain.Game {
 	return domain.Game{
 		int(dto.PointsGained),
-		domain.WinStatus(dto.WinStatusDto),
-		domain.GameType(dto.GameTypeDto),
+		domain.WinStatus(dto.WinStatus),
+		domain.GameType(dto.GameType),
 		time.Time(dto.Created),
 	}
 }

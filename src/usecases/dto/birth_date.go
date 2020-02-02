@@ -5,16 +5,16 @@ import (
 	"time"
 )
 
-type BirthDateDto time.Time
+type BirthDate time.Time
 
 const BirthDateFormat = "Monday, January 2, 2006 3:04 PM"
 
-func (i BirthDateDto) MarshalJSON() ([]byte, error) {
+func (i BirthDate) MarshalJSON() ([]byte, error) {
 	tmp := time.Time(i)
 	return []byte(tmp.Format(BirthDateFormat)), nil
 }
 
-func (i *BirthDateDto) UnmarshalJSON(raw []byte) error {
+func (i *BirthDate) UnmarshalJSON(raw []byte) error {
 	var str string
 
 	err := json.Unmarshal(raw, &str)
@@ -29,7 +29,7 @@ func (i *BirthDateDto) UnmarshalJSON(raw []byte) error {
 		return err
 	}
 
-	*i = BirthDateDto(tmp)
+	*i = BirthDate(tmp)
 
 	return nil
 }

@@ -7,7 +7,7 @@ import (
 	"mongodb-example/src/usecases/dto"
 )
 
-func DtoToUser(dto dto.UserDto) domain.User {
+func DtoToUser(dto dto.User) domain.User {
 	return domain.User{
 		dto.Email,
 		dto.LastName,

@@ -27,7 +27,7 @@ func TestGameDto_UnmarshalJSON(t *testing.T) {
 				1933,
 				0,
 				17,
-				DateDto(time.Date(2019, 1, 17, 9, 54, 0, 0, location)),
+				Date(time.Date(2019, 1, 17, 9, 54, 0, 0, location)),
 			},
 		},
 		{
@@ -41,7 +41,7 @@ func TestGameDto_UnmarshalJSON(t *testing.T) {
 				1076,
 				1,
 				5,
-				DateDto(time.Date(2019, 5, 24, 17, 36, 0, 0, location)),
+				Date(time.Date(2019, 5, 24, 17, 36, 0, 0, location)),
 			},
 		},
 	}
