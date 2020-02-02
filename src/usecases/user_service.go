@@ -15,16 +15,13 @@ type UserService struct {
 	validator      Validator
 }
 
-func (s *UserService) Store(dto dto.UserDto) error {
+func (s *UserService) Store(dto dto.UserDto) (string, error) {
 	err := s.validator.Struct(dto)
 	if err != nil {
-		return err
+		return "", err
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), userServiceStoreTimeout)
 	defer cancel()
 
-	if err := s.userRepository.Store(ctx, adapter.DtoToUser(dto)); err != nil {
-		return err
-	}
-	return ctx.Err()
+	return s.userRepository.Store(ctx, adapter.DtoToUser(dto))
 }

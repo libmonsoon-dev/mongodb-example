@@ -7,5 +7,5 @@ import (
 )
 
 type UserRepository interface {
-	Store(ctx context.Context, user domain.User) error
+	Store(ctx context.Context, user domain.User) (id string, err error)
 }

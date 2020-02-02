@@ -15,16 +15,13 @@ type GameService struct {
 	validator      Validator
 }
 
-func (s *GameService) Store(dto dto.GameDto) error {
+func (s *GameService) Store(dto dto.GameDto) (string, error) {
 	err := s.validator.Struct(dto)
 	if err != nil {
-		return err
+		return "", err
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), gameServiceStoreTimeout)
 	defer cancel()
 
-	if err := s.gameRepository.Store(ctx, adapter.DtoToGame(dto)); err != nil {
-		return err
-	}
-	return ctx.Err()
+	return s.gameRepository.Store(ctx, adapter.DtoToGame(dto))
 }

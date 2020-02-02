@@ -7,5 +7,5 @@ import (
 )
 
 type GameRepository interface {
-	Store(ctx context.Context, user domain.Game) error
+	Store(ctx context.Context, user domain.Game) (id string, err error)
 }
