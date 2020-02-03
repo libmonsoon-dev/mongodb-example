@@ -10,12 +10,16 @@ import (
 
 const userServiceStoreTimeout = 1 * time.Second
 
+type IUserService interface {
+	Store(dto dto.User) (string, error)
+}
+
 type UserService struct {
 	userRepository UserRepository
 	validator      Validator
 }
 
-func NewUserService(userRepository UserRepository, validator Validator) *UserService {
+func NewUserService(userRepository UserRepository, validator Validator) IUserService {
 	return &UserService{userRepository, validator}
 }
 

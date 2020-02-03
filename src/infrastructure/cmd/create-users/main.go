@@ -3,9 +3,8 @@ package main
 import (
 	"encoding/json"
 	"flag"
-	"fmt"
 	"io/ioutil"
-	"log"
+	"mongodb-example/src/infrastructure"
 	"os"
 
 	"github.com/cheggaaa/pb/v3"
@@ -18,8 +17,6 @@ type Data struct {
 }
 
 func main() {
-	logger := log.New(os.Stdout, "[create-users] ", log.Ltime)
-
 	path := flag.String("path", "./seeds/users_go.json", "Path to json with users")
 	maxThreads := flag.Int("threads", 100, "Max insert threads")
 
@@ -27,15 +24,19 @@ func main() {
 
 	sem := make(chan struct{}, *maxThreads)
 
-	service, err := InitializeUserService()
+	service, err := Init()
+	logger := infrastructure.NewStdLogger()
 
 	if err != nil {
-		panic(fmt.Errorf("cannot initialize UserService: %w", err))
+		logger.Errorf("cannot initialize UserService: %w", err)
+		os.Exit(1)
 	}
 
 	raw, err := ioutil.ReadFile(*path)
 	if err != nil {
-		panic(fmt.Errorf("canot read %v: %w", *path, err))
+		logger.Errorf("canot read %v: %w", *path, err)
+		os.Exit(1)
+
 	}
 
 	var data Data
@@ -51,7 +52,7 @@ func main() {
 		go func(user dto.User) {
 			_, err := service.Store(user)
 			if err != nil {
-				logger.Printf("Error while saving %#v: %v\n", user, err)
+				logger.Errorln("Error while saving %#v: %v\n", user, err)
 			}
 			<-sem
 			bar.Increment()

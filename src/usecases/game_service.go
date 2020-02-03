@@ -10,9 +10,17 @@ import (
 
 const gameServiceStoreTimeout = 1 * time.Second
 
+type IGameService interface {
+	Store(dto dto.Game) (string, error)
+}
+
 type GameService struct {
 	gameRepository GameRepository
 	validator      Validator
+}
+
+func NewGameService(gameRepository GameRepository, validator Validator) IGameService {
+	return &GameService{gameRepository: gameRepository, validator: validator}
 }
 
 func (s *GameService) Store(dto dto.Game) (string, error) {

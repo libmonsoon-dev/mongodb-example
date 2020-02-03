@@ -1,9 +1,12 @@
 package apiV1
 
-import "net/http"
+import (
+	"mongodb-example/src/usecases"
+	"net/http"
+)
 
-func New() *http.ServeMux {
+func New(logger usecases.Logger, userService usecases.IUserService) http.Handler {
 	mux := http.NewServeMux()
-	// mux.Handle()
+	mux.Handle("/user", http.StripPrefix("/user", NewUserHandler(logger, userService)))
 	return mux
 }

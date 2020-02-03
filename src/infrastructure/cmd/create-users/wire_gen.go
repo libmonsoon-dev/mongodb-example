@@ -13,7 +13,7 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeUserService() (*usecases.UserService, error) {
+func Init() (usecases.IUserService, error) {
 	config := mongo.DefaultConfig()
 	database, err := mongo.NewDbConnection(config)
 	if err != nil {
@@ -21,6 +21,6 @@ func InitializeUserService() (*usecases.UserService, error) {
 	}
 	userRepository := repository.NewMongoUserRepository(database)
 	validator := usecases.NewValidator()
-	userService := usecases.NewUserService(userRepository, validator)
-	return userService, nil
+	iUserService := usecases.NewUserService(userRepository, validator)
+	return iUserService, nil
 }

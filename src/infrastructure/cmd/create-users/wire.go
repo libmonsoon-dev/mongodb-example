@@ -11,7 +11,7 @@ import (
 	"github.com/google/wire"
 )
 
-func InitializeUserService() (*usecases.UserService, error) {
+func Init() (usecases.IUserService, error) {
 	panic(wire.Build(
 		usecases.NewUserService,
 		usecases.NewValidator,
