@@ -58,6 +58,7 @@ func (c userController) jsonCreateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set(utils.ContentType, utils.ApplicationJson)
 	w.WriteHeader(http.StatusCreated)
 	rawResp, err := json.Marshal(dto.Id{id})
 	if _, err = w.Write(rawResp); err != nil {

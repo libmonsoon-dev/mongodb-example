@@ -7,6 +7,6 @@ import (
 
 func New(logger usecases.Logger, userService usecases.IUserService) http.Handler {
 	mux := http.NewServeMux()
-	mux.Handle("/user", http.StripPrefix("/user", NewUserHandler(logger, userService)))
+	mux.Handle("/user/", http.StripPrefix("/user", NewUserHandler(logger, userService)))
 	return mux
 }
