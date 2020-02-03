@@ -4,22 +4,19 @@ import (
 	"context"
 	"time"
 
+	"mongodb-example/src/domain"
+	"mongodb-example/src/domain/dto"
 	"mongodb-example/src/usecases/adapter"
-	"mongodb-example/src/usecases/dto"
 )
 
 const userServiceStoreTimeout = 1 * time.Second
-
-type IUserService interface {
-	Store(dto dto.User) (string, error)
-}
 
 type UserService struct {
 	userRepository UserRepository
 	validator      Validator
 }
 
-func NewUserService(userRepository UserRepository, validator Validator) IUserService {
+func NewUserService(userRepository UserRepository, validator Validator) domain.UserService {
 	return &UserService{userRepository, validator}
 }
 

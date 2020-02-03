@@ -25,7 +25,7 @@ func Init() (http.Handler, error) {
 	}
 	userRepository := repository.NewMongoUserRepository(database)
 	validator := usecases.NewValidator()
-	iUserService := usecases.NewUserService(userRepository, validator)
-	handler := api.New(logger, iUserService)
+	userService := usecases.NewUserService(userRepository, validator)
+	handler := api.New(logger, userService)
 	return handler, nil
 }

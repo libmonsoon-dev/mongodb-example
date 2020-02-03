@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"io/ioutil"
+	"mongodb-example/src/domain/dto"
 	"mongodb-example/src/infrastructure"
 	"os"
 
 	"github.com/cheggaaa/pb/v3"
-
-	"mongodb-example/src/usecases/dto"
 )
 
 type Data struct {

@@ -2,24 +2,21 @@ package usecases
 
 import (
 	"context"
+	"mongodb-example/src/domain"
 	"time"
 
+	"mongodb-example/src/domain/dto"
 	"mongodb-example/src/usecases/adapter"
-	"mongodb-example/src/usecases/dto"
 )
 
 const gameServiceStoreTimeout = 1 * time.Second
-
-type IGameService interface {
-	Store(dto dto.Game) (string, error)
-}
 
 type GameService struct {
 	gameRepository GameRepository
 	validator      Validator
 }
 
-func NewGameService(gameRepository GameRepository, validator Validator) IGameService {
+func NewGameService(gameRepository GameRepository, validator Validator) domain.GameService {
 	return &GameService{gameRepository: gameRepository, validator: validator}
 }
 

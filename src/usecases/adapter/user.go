@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"mongodb-example/src/domain"
-	"mongodb-example/src/usecases/dto"
+	"mongodb-example/src/domain/dto"
 )
 
 func DtoToUser(dto dto.User) domain.User {

@@ -3,9 +3,10 @@ package apiV1
 import (
 	"encoding/json"
 	"io/ioutil"
+	"mongodb-example/src/domain"
+	"mongodb-example/src/domain/dto"
 	"mongodb-example/src/interfaces/api/utils"
 	"mongodb-example/src/usecases"
-	"mongodb-example/src/usecases/dto"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -14,10 +15,10 @@ import (
 type userController struct {
 	*mux.Router
 	logger      usecases.Logger
-	userService usecases.IUserService
+	userService domain.UserService
 }
 
-func NewUserHandler(logger usecases.Logger, userService usecases.IUserService) http.Handler {
+func NewUserHandler(logger usecases.Logger, userService domain.UserService) http.Handler {
 	r := &userController{
 		mux.NewRouter(),
 		logger,

@@ -6,6 +6,7 @@
 package main
 
 import (
+	"mongodb-example/src/domain"
 	"mongodb-example/src/infrastructure/db/mongo"
 	"mongodb-example/src/interfaces/mongo/repository"
 	"mongodb-example/src/usecases"
@@ -13,7 +14,7 @@ import (
 
 // Injectors from wire.go:
 
-func Init() (usecases.IUserService, error) {
+func Init() (domain.UserService, error) {
 	config := mongo.DefaultConfig()
 	database, err := mongo.NewDbConnection(config)
 	if err != nil {
@@ -21,6 +22,6 @@ func Init() (usecases.IUserService, error) {
 	}
 	userRepository := repository.NewMongoUserRepository(database)
 	validator := usecases.NewValidator()
-	iUserService := usecases.NewUserService(userRepository, validator)
-	return iUserService, nil
+	userService := usecases.NewUserService(userRepository, validator)
+	return userService, nil
 }
