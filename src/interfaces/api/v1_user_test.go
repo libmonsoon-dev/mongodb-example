@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"mongodb-example/src/domain/dto"
-	"mongodb-example/src/interfaces/api/utils"
+	. "mongodb-example/src/interfaces/api/utils"
 	"net/http"
 	"testing"
 	"time"
@@ -32,7 +32,7 @@ func TestPostV1User(t *testing.T) {
 
 	resp, err := http.Post(
 		server.URL+"/v1/user",
-		utils.ApplicationJson,
+		ApplicationJson,
 		bytes.NewBuffer(raw),
 	)
 
