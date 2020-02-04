@@ -11,7 +11,8 @@ const BirthDateFormat = "Monday, January 2, 2006 3:04 PM"
 
 func (i BirthDate) MarshalJSON() ([]byte, error) {
 	tmp := time.Time(i)
-	return []byte(tmp.Format(BirthDateFormat)), nil
+
+	return json.Marshal(tmp.Format(BirthDateFormat))
 }
 
 func (i *BirthDate) UnmarshalJSON(raw []byte) error {

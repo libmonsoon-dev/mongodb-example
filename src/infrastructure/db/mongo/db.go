@@ -11,3 +11,11 @@ func NewDbConnection(config *Config) (*mongo.Database, error) {
 
 	return client.Database(config.DataBaseName), nil
 }
+
+func MustNewDbConnection(config *Config) *mongo.Database {
+	db, err := NewDbConnection(config)
+	if err != nil {
+		panic(err)
+	}
+	return db
+}
