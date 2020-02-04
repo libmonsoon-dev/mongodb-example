@@ -31,7 +31,7 @@ func TestPostV1User(t *testing.T) {
 	}
 
 	resp, err := http.Post(
-		server.URL+"/v1/user/",
+		server.URL+"/v1/user",
 		utils.ApplicationJson,
 		bytes.NewBuffer(raw),
 	)

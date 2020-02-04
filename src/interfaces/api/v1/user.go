@@ -25,7 +25,7 @@ func NewUserHandler(logger usecases.Logger, userService domain.UserService) http
 		userService,
 	}
 
-	r.Router.Path("/").Methods(http.MethodPost).Headers(utils.ContentType, utils.ApplicationJson).HandlerFunc(r.jsonCreateUser)
+	r.Router.Path("/user").Methods(http.MethodPost).Headers(utils.ContentType, utils.ApplicationJson).HandlerFunc(r.jsonCreateUser)
 
 	return r
 }
