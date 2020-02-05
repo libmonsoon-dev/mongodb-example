@@ -27,13 +27,13 @@ func main() {
 	logger := infrastructure.NewStdLogger()
 
 	if err != nil {
-		logger.Errorf("cannot initialize UserService: %w", err)
+		logger.Errorf("cannot initialize UserService: %w\n", err)
 		os.Exit(1)
 	}
 
 	raw, err := ioutil.ReadFile(*path)
 	if err != nil {
-		logger.Errorf("canot read %v: %w", *path, err)
+		logger.Errorf("cannot read %v: %v\n", *path, err)
 		os.Exit(1)
 
 	}
@@ -51,7 +51,7 @@ func main() {
 		go func(user dto.User) {
 			_, err := service.Store(user)
 			if err != nil {
-				logger.Errorln("Error while saving %#v: %v\n", user, err)
+				logger.Errorf("Error while saving %#v: %v\n", user, err)
 			}
 			<-sem
 			bar.Increment()
